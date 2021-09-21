@@ -16,11 +16,18 @@ const getTableHeaders = (object = {}) => {
  * @param {*} row data element
  */
 const renderRows = (row = {}) => {
+
+  let stars = "";
+  let i = 0;
+  for(i = 0; i < row.rating; i++){
+      stars = stars + "⭐ "
+  }
   return (
     <tr key={row.id}>
       {Object.values(row).map(
         (value, i) => <td key={i}>{value}</td>
       )}
+    <td>{stars}</td>
     </tr>
   )
 }
@@ -33,8 +40,10 @@ const BasicTable = ({ data }) => {
           {getTableHeaders(data[0]).map(
             headerName => <th key={headerName}>{headerName}</th>
             )}
+            <th key="stars">Stars</th>
         </tr>
         {data.map(renderRows)}
+        
       </tbody>
     </table>
   )
